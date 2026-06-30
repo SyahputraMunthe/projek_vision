@@ -4,40 +4,89 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Hasil Prediksi</title>
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="background"></div>
 
-<h1>Hasil Prediksi</h1>
+<div class="result-container">
 
-<img src="{{ url_for('uploaded_file', filename=image) }}"
-style="width:280px;border-radius:10px;">
+    <div class="result-card">
 
-<h2 style="margin-top:20px;">
+        <div class="image-section">
 
-{{ result }}
+            <h2>Chest X-Ray</h2>
 
-</h2>
+            <img src="{{ url_for('uploaded_file', filename=image) }}">
 
-<br>
+        </div>
 
-<a href="{{ url_for('index') }}">
+        <div class="info-section">
 
-<button>
+            <h1>Hasil Analisis AI</h1>
 
-Upload Gambar Lain
+            {% if result == "Normal" %}
 
-</button>
+                <div class="status normal">
 
-</a>
+                    🟢 NORMAL
+
+                </div>
+
+                <p class="description">
+
+                    Sistem mendeteksi bahwa citra paru-paru termasuk dalam kategori <b>Normal</b>.
+                    Tidak ditemukan karakteristik yang mengarah pada Tuberkulosis berdasarkan model SVM.
+
+                </p>
+
+            {% else %}
+
+                <div class="status tbc">
+
+                    🔴 TUBERKULOSIS
+
+                </div>
+
+                <p class="description">
+
+                    Sistem mendeteksi karakteristik yang menyerupai <b>Tuberkulosis (TBC)</b>.
+                    Hasil ini hanya merupakan prediksi model Machine Learning dan bukan diagnosis medis.
+
+                    Silakan konsultasikan dengan tenaga kesehatan untuk pemeriksaan lebih lanjut.
+
+                </p>
+
+            {% endif %}
+
+            <div class="warning">
+
+                ⚠️ Hasil ini hanya sebagai media edukasi dan tidak menggantikan diagnosis dokter.
+
+            </div>
+
+            <a href="{{ url_for('index') }}">
+
+                <button>
+
+                    🔄 Analisis Gambar Lain
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
