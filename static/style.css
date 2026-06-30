@@ -110,3 +110,11 @@ button:hover{
 
     background:#0b3d68;
 }
+input[type=file]{
+    width:100%;
+    padding:12px;
+    border:2px solid #0f4c81;
+    border-radius:8px;
+    background:#fff;
+    margin-bottom:20px;
+}
