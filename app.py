@@ -22,6 +22,9 @@ if not os.path.exists(MODEL_PATH):
     print("Mengunduh model...")
     gdown.download(URL, MODEL_PATH, quiet=False)
 
+print("Model ada?", os.path.exists(MODEL_PATH))
+print("Ukuran model:", os.path.getsize(MODEL_PATH) if os.path.exists(MODEL_PATH) else 0)
+
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
