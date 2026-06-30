@@ -1,36 +1,48 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Deteksi TBC</title>
+    <title>Deteksi Tuberkulosis (TBC)</title>
 
-    <link rel="stylesheet" href="/static/style.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>Deteksi Penyakit TBC</h1>
+    <h1>🩺 Deteksi Penyakit Tuberkulosis</h1>
 
-        <form action="/predict" method="POST" enctype="multipart/form-data">
+    <p class="subtitle">
+        Upload citra X-Ray paru-paru untuk mengetahui apakah
+        terdeteksi <b>Normal</b> atau <b>Tuberkulosis (TBC)</b>.
+    </p>
 
-            <input type="file" name="image" required>
+    <form action="{{ url_for('predict') }}"
+          method="POST"
+          enctype="multipart/form-data">
 
-            <br><br>
+        <label class="upload-box">
 
-            <button type="submit">
+            <input
+                type="file"
+                name="image"
+                accept=".jpg,.jpeg,.png"
+                required>
 
-                Prediksi
+            <span>Pilih Gambar X-Ray</span>
 
-            </button>
+        </label>
 
-        </form>
+        <button type="submit">
+            🔍 Prediksi
+        </button>
 
-    </div>
+    </form>
+
+</div>
 
 </body>
-
 </html>
