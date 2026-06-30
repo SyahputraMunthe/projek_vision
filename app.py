@@ -3,7 +3,7 @@ import os
 import cv2
 import numpy as np
 import joblib
-import gdown
+from skimage.feature import hog
 
 app = Flask(__name__)
 
@@ -14,20 +14,12 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # ==========================
 # Download dan Load Model
 # ==========================
-
 MODEL_PATH = "model_svm_tbc.pkl"
-
-FILE_ID = "1mclt8gX9GA2DUbtaing_J0AUwRXRGVMk"
-
-URL = f"https://drive.google.com/uc?id={FILE_ID}"
-
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model...")
-    gdown.download(URL, MODEL_PATH, quiet=False)
 
 print("Loading model...")
 model = joblib.load(MODEL_PATH)
 print("Model loaded.")
+
 
 
 # ==========================
@@ -41,9 +33,17 @@ def preprocess(image_path):
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    gray = gray / 255.0
+    gray = gray.astype("float32") / 255.0
 
-    feature = gray.flatten().reshape(1, -1)
+    feature = hog(
+        gray,
+        orientations=9,
+        pixels_per_cell=(8, 8),
+        cells_per_block=(2, 2),
+        block_norm="L2-Hys"
+    )
+
+    feature = feature.reshape(1, -1)
 
     return feature
 
