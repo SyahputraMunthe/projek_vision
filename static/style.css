@@ -12,7 +12,13 @@ font-family:'Poppins',sans-serif;
 
 body{
 
-height:100vh;
+min-height:100vh;
+
+background:#071426;
+
+overflow-x:hidden;
+
+overflow-y:auto;
 
 display:flex;
 
@@ -20,9 +26,7 @@ justify-content:center;
 
 align-items:center;
 
-background:#071426;
-
-overflow:hidden;
+padding:30px;
 
 }
 
@@ -52,7 +56,7 @@ display:flex;
 
 border-radius:25px;
 
-overflow:hidden;
+
 
 backdrop-filter:blur(18px);
 
@@ -286,7 +290,7 @@ width:1200px;
 
 display:flex;
 
-overflow:hidden;
+
 
 border-radius:25px;
 
